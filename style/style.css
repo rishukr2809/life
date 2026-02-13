@@ -127,7 +127,6 @@ body {
   width: 80px;
   top: -35px;
   left: 41.5%;
-  /* transform: scale(0.1); */
 }
 
 .baloons img {
@@ -214,7 +213,6 @@ body {
 .wish-hbd {
   font-size: 3em;
   margin: 0;
-  /* text-transform: uppercase; */
 }
 
 .wish h5 {
@@ -231,6 +229,289 @@ body {
 #replay {
   z-index: 3;
   cursor: pointer;
+}
+
+/* ===== MEMORIES FLIP CARD CAROUSEL STYLES ===== */
+.memories-section {
+  position: relative;
+  width: 100%;
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #c41e3a 0%, #8b0a1a 50%, #d63447 100%);
+  text-align: center;
+  visibility: hidden;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.memories-headline {
+  font-size: 3.5rem;
+  color: #fff;
+  margin-bottom: 50px;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+}
+
+.memories-flip-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Flip Card Styling */
+.flip-card {
+  background-color: transparent;
+  width: 350px;
+  height: 400px;
+  perspective: 1000px;
+  margin: 0 auto;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card-front {
+  background-color: #f1f1f1;
+  color: black;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 5px solid #fff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.flip-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.flip-card-front.flip {
+  animation: flipCard 0.6s ease-in-out;
+}
+
+@keyframes flipCard {
+  0% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotateY(360deg);
+    opacity: 1;
+  }
+}
+
+/* Memory Counter */
+.memory-counter {
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px 30px;
+  border-radius: 50px;
+}
+
+/* Memory Controls */
+.memory-controls {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.memory-btn {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  color: white;
+  background: linear-gradient(135deg, #ff6b9d 0%, #d63447 100%);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.memory-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+}
+
+.memory-btn:active {
+  transform: translateY(0);
+}
+
+.prev-btn:disabled,
+.next-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.prev-btn:disabled:hover,
+.next-btn:disabled:hover {
+  transform: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== VALENTINE QUESTION STYLES ===== */
+.valentine-question {
+  position: relative;
+  width: 100%;
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #e91e63 0%, #c2185b 50%, #f50057 100%);
+  text-align: center;
+  visibility: hidden;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.question-text {
+  font-size: 3rem;
+  color: #fff;
+  margin-bottom: 50px;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  animation: pulse 2s infinite;
+  letter-spacing: 1px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+
+.btn-yes,
+.btn-no {
+  padding: 15px 40px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.btn-yes {
+  background: linear-gradient(135deg, #ff1493, #ff69b4);
+  color: white;
+  z-index: 20;
+}
+
+.btn-yes:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(255, 20, 147, 0.5);
+}
+
+.btn-yes:active {
+  transform: scale(0.95);
+}
+
+.btn-no {
+  background: linear-gradient(135deg, #cccccc, #999999);
+  color: white;
+}
+
+.btn-no:hover {
+  transform: translate(50px, 50px);
+}
+
+/* ===== LOVE RESPONSE STYLES ===== */
+.love-response {
+  position: relative;
+  width: 100%;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #c41e3a 0%, #8b0a1a 50%, #ff1744 100%);
+  text-align: center;
+  visibility: hidden;
+  display: none;
+  min-height: 500px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.love-response.show {
+  display: block;
+  visibility: visible;
+}
+
+.love-text {
+  font-size: 4rem;
+  color: white;
+  margin: 0 0 20px 0;
+  font-weight: bold;
+  animation: bounce 1s ease;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+}
+
+.love-message {
+  font-size: 2rem;
+  color: white;
+  margin: 0;
+  font-weight: lighter;
+  animation: fadeInUp 1s ease 0.3s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Media Queries */
@@ -258,7 +539,7 @@ body {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .container {
     width: 90%;
   }
@@ -296,5 +577,55 @@ body {
   .nine p {
     font-size: 1.5rem;
     font-weight: lighter;
+  }
+
+  /* Memories Carousel Mobile */
+  .memories-headline {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .flip-card {
+    width: 280px;
+    height: 320px;
+  }
+
+  .memory-counter {
+    font-size: 1.4rem;
+  }
+
+  .memory-controls {
+    gap: 10px;
+  }
+
+  .memory-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  /* Valentine Question Mobile */
+  .question-text {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .button-container {
+    gap: 15px;
+    padding: 20px;
+  }
+
+  .btn-yes,
+  .btn-no {
+    padding: 12px 25px;
+    font-size: 0.95rem;
+  }
+
+  /* Love Response Mobile */
+  .love-text {
+    font-size: 2rem;
+  }
+
+  .love-message {
+    font-size: 1.3rem;
   }
 }

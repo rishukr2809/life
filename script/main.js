@@ -60,7 +60,6 @@ const animationTimeline = () => {
     .from(".three", 0.7, {
       opacity: 0,
       y: 10,
-      // scale: 0.7
     })
     .to(
       ".three",
@@ -205,7 +204,6 @@ const animationTimeline = () => {
       {
         opacity: 0,
         y: -50,
-        // scale: 0.3,
         rotation: 150,
         skewX: "30deg",
         ease: Elastic.easeOut.config(1, 0.5),
@@ -256,6 +254,39 @@ const animationTimeline = () => {
       zIndex: "-1",
     })
     .staggerFrom(".nine p", 1, ideaTextTrans, 1.2)
+    // Memories Carousel Animation
+    .from(".memories-section", 0.8, {
+      opacity: 0,
+      y: 50,
+    }, "+=0.5")
+    .to(".memories-section", 0.1, {
+      visibility: "visible",
+    }, "-=0.8")
+    // Valentine Question Animation
+    .from(".valentine-question", 0.8, {
+      opacity: 0,
+      scale: 0.9,
+    }, "+=1")
+    .to(".valentine-question", 0.1, {
+      visibility: "visible",
+    }, "-=0.8")
+    .from(
+      ".question-text",
+      0.6,
+      {
+        opacity: 0,
+        scale: 0.5,
+      }
+    )
+    .from(
+      ".button-container",
+      0.6,
+      {
+        opacity: 0,
+        y: 30,
+      },
+      "-=0.3"
+    )
     .to(
       ".last-smile",
       0.5,
@@ -265,13 +296,89 @@ const animationTimeline = () => {
       "+=1"
     );
 
-  // tl.seek("currentStep");
-  // tl.timeScale(2);
-
   // Restart Animation on click
   const replyBtn = document.getElementById("replay");
   replyBtn.addEventListener("click", () => {
     tl.restart();
+  });
+};
+
+// Memory Carousel Handler
+const handleMemoriesCarousel = () => {
+  let currentMemory = 1;
+  const totalMemories = 20;
+  const memoryImage = document.getElementById("memoryImage");
+  const currentMemorySpan = document.getElementById("currentMemory");
+  const prevBtn = document.getElementById("prevMemory");
+  const nextBtn = document.getElementById("nextMemory");
+  const flipCardFront = document.querySelector(".flip-card-front");
+
+  const updateMemory = (index) => {
+    // Flip animation
+    flipCardFront.classList.remove("flip");
+    void flipCardFront.offsetWidth; // Trigger reflow
+    flipCardFront.classList.add("flip");
+    
+    // Update image after flip
+    setTimeout(() => {
+      memoryImage.src = `memories/${index}.jpg`;
+      currentMemorySpan.textContent = index;
+      
+      // Update button states
+      prevBtn.disabled = index === 1;
+      nextBtn.disabled = index === totalMemories;
+    }, 300);
+  };
+
+  prevBtn.addEventListener("click", () => {
+    if (currentMemory > 1) {
+      currentMemory--;
+      updateMemory(currentMemory);
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    if (currentMemory < totalMemories) {
+      currentMemory++;
+      updateMemory(currentMemory);
+    }
+  });
+
+  // Initial state
+  updateMemory(currentMemory);
+};
+
+// Valentine Question Handler
+const handleValentineQuestion = () => {
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const loveResponse = document.getElementById("loveResponse");
+  
+  yesBtn.addEventListener("click", () => {
+    loveResponse.classList.add("show");
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth"
+    });
+  });
+
+  noBtn.addEventListener("mouseover", () => {
+    const randomX = Math.random() * window.innerWidth - 100;
+    const randomY = Math.random() * window.innerHeight - 50;
+    
+    noBtn.style.position = "fixed";
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+  });
+
+  noBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const randomX = Math.random() * window.innerWidth - 100;
+    const randomY = Math.random() * window.innerHeight - 50;
+    
+    noBtn.style.position = "fixed";
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
   });
 };
 
@@ -302,4 +409,8 @@ const resolveFetch = () => {
   });
 };
 
-resolveFetch().then(animationTimeline());
+resolveFetch().then(() => {
+  animationTimeline();
+  handleMemoriesCarousel();
+  handleValentineQuestion();
+});
